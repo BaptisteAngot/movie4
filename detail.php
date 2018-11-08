@@ -46,13 +46,9 @@ else {
       <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
   <div class="star-ratings-sprite"><span style="width: <?php echo $movie['rating'];?>%" class="star-ratings-sprite-rating"></span></div>
 </div>
-
-<<<<<<< HEAD
 // Si connecté, affiche un bouton d'ajout à sa liste
 <?php if (isLogged()){?>
   <a href="addlist.php">Ajouter à la liste</a>
 <?php } ?>
-=======
->>>>>>> 08d90f3c0fd6f722be65cbd285d5eedb4818a7e6
 
 <?php include('inc/footer.php'); ?>
