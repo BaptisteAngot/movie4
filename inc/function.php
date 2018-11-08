@@ -17,7 +17,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     $minutes = ($time % 60);
     return sprintf($format, $hours, $minutes);
 }
-=======
   function br()
   {
     echo '<br />';
