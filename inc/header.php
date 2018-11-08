@@ -21,10 +21,10 @@
           <li><a href="index.php">Acceuil</a></li>
           <?php if (isLogged()) { ?>
             <li><a href="deconnexion.php">Déconnexion</a></li>
-          <?php } else { ?>
             <?php if (isAdmin()) { ?>
               <li><a href="dashboard.php">Admin</a></li>
             <?php } ?>
+          <?php } else { ?>
             <li><a href="inscription.php">Inscription</a></li>
             <li><a href="connexion.php">Connexion</a></li>
           <?php } ?>
