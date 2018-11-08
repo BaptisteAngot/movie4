@@ -8,65 +8,18 @@ if (!empty($_POST['submitted']))
 
   // Vérification pseudo
   $pseudo = trim(strip_tags($_POST['pseudo']));
-  if (!empty($pseudo)){
-    // Requête SQL des pseudos
-    $sql = "SELECT pseudo FROM user WHERE pseudo = :pseudo";
-    $query = $pdo -> prepare($sql);
-    $query -> bindValue(':pseudo', $pseudo, PDO::PARAM_STR);
-    $query -> execute();
-    $resultatPseudo = $query->fetch();
+  validationpseudo($error,$pseudo,3,50);
 
-      if(strlen($pseudo) < 3 ) {
-        $error['pseudo'] = 'trop court.';
-      }
-      elseif(strlen($pseudo) > 50) {
-        $error['pseudo'] = 'trop long.';
-      }
-      elseif (!empty($resultatPseudo)) {
-        $error['pseudo'] = 'Déjà pris.';
-      }
-  } else {
-      $error['pseudo'] = 'Veuillez renseignez ce champ';
-  }
-
-
+  //Vérfication email
   $mail = trim(strip_tags($_POST['mail']));
-  if (!empty($mail)){
-    // Requête SQL des pseudos
-    $sql = "SELECT email FROM user WHERE email = :mail";
-    $query = $pdo -> prepare($sql);
-    $query -> bindValue(':mail', $mail, PDO::PARAM_STR);
-    $query -> execute();
-    $resultatMail = $query->fetch();
-
-    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-      $error['mail'] = 'E-mail invalide';
-    }
-    elseif (!empty($resultatMail)) {
-      $error['mail'] = 'Déjà pris.';
-    }
-  }
-  else {
-      $error['mail'] = 'Veuillez renseignez ce champ';
-  }
+  validationemail($error,$mail);
 
 
 
   $mdp = trim(strip_tags($_POST['mdp']));
   $mdp2 = trim(strip_tags($_POST['mdp2']));
-  if ((!empty($mdp)) && (!empty($mdp2))) {
-      if(strlen($mdp) < 3 ) {
-        $error['mdp'] = 'trop court.';
-      }
-      elseif(strlen($mdp) > 50) {
-        $error['mdp'] = 'trop long.';
-      }
-      elseif ($mdp != $mdp2) {
-        $error['mdp'] = 'Veuillez renseigné le même mdp.';
-      }
-  } else {
-      $error['mdp'] = 'Veuillez renseignez ce champ';
-  }
+  validationpassword($error,$mdp,$mdp2,3,50);
+
 
   if (count($error) == 0) {
     // Inscrire un post dans la BDD

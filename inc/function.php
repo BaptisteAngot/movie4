@@ -71,6 +71,98 @@
       return $randomString;
   }
 
+  function validationpseudo($error,$pseudo,$min,$max,$empty = true){
+  global $pdo;
+
+  if (!empty($pseudo)) {
+    if(strlen($pseudo)<$min){
+      $error['pseudo']= 'minimum '.$min .' caractères';
+    }
+    elseif (strlen($pseudo)>$max) {
+      $error['pseudo']= 'maximum '.$max.' caractères';
+    }
+    else{
+      //Verification si idverif existe déjà
+        //Selection de $idverif de $table de la $bdd
+        $sql="SELECT pseudo FROM user WHERE pseudo = :pseudo";
+        $query=$pdo->prepare($sql);
+        $query->bindValue(':pseudo',$pseudo,PDO::PARAM_STR);
+        $query->execute();
+        $resultat = $query->fetch();
+
+        if(!empty($resultat)){
+          $error['pseudo']='Pseudo déjà utilisé';
+        }
+    }
+  }
+  else{
+    if($pseudo){
+      $error['pseudo']='veuillez renseigner ce champ';
+    }
+  }
+    return $error;
+}
+
+
+  function validationemail($error,$mail,$empty=true){
+  global $pdo;
+
+  if(!empty($mail)){
+    if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
+
+        $sql="SELECT email FROM user WHERE email = :email";
+        $query=$pdo->prepare($sql);
+        $query->bindValue(':email',$mail,PDO::PARAM_STR);
+        $query->execute();
+        $resultatmail = $query->fetch();
+
+        if(!empty($resultatmail)){
+          $error['mail']='Mail déjà utilisé';
+        }
+
+    } else {
+      $error['mail'] = ' mail invalide';
+    }
+  }
+  else {
+    $error['mail'] = 'Erreur : mail vide';
+  }
+  return $error;
+  }
+
+  function validationpassword($error,$password1,$password2,$min,$max,$empty = true){
+    global $pdo;
+    if (!empty($password1)) {
+      if($password1 != $password2){
+        $error['password'] = 'Erreur: Veuillez saisir le même mot de passe';
+      }
+      elseif(strlen($password1)<$min){
+        $error['password']= 'minimum '.$min .' caractères';
+      }
+      elseif (strlen($password1)>$max) {
+        $error['password']= 'maximum '.$max.' caractères';
+      }
+      else{
+        //Verification si idverif existe déjà
+          //Selection de $idverif de $table de la $bdd
+          $sql="SELECT password FROM user WHERE password = :password";
+          $query=$pdo->prepare($sql);
+          $query->bindValue(':password',$password1,PDO::PARAM_STR);
+          $query->execute();
+          $resultatpassword = $query->fetch();
+
+          if(!empty($resultatpassword)){
+            $error['password']='Pseudo déjà utilisé';
+          }
+      }
+    }
+    else {
+      $error['password'] = 'Erreur : password vide';
+    }
+    return $error;
+  }
+
+
   function isAdmin()
   {
     if (isLogged()) {
