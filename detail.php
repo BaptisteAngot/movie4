@@ -30,7 +30,8 @@ else {
   die('404');
 }
 
- ?>
+?>
+
 <?php include('inc/header.php'); ?>
 
 <div class="film">
@@ -45,5 +46,10 @@ else {
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
     <p class="rating">Rating: <?php echo $movie['rating'];?></p>
 </div>
+
+// Si connecté, affiche un bouton d'ajout à sa liste
+<?php if (isLogged()){?>
+  <a href="addlist.php">Ajouter à la liste</a>
+<?php } ?>
 
 <?php include('inc/footer.php'); ?>
