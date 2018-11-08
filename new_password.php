@@ -10,7 +10,7 @@ if (!empty($_GET['email']) && !empty($_GET['token'])) {
   $sql = "SELECT * FROM user WHERE email = '$mail' AND token = '$token'";
   $query = $pdo -> prepare($sql);
   $query -> execute();
-  $user = $query->²();
+  $user = $query->fetch();
   debug($user);
   if (!empty($user))
   {
