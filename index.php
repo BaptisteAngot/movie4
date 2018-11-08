@@ -6,15 +6,15 @@
       $query = $pdo -> prepare($sql);
       $query -> execute();
       $movie = $query -> fetchall();
-
+      include 'inc/header.php';
       foreach ($movie as $film) {
         // echo $film['id']; ?>
         <div class="posters">
-        <a href="detail.php"><img src="posters/<?php echo $film['id']; ?>.jpg" alt="posters"></a>
+        <a href="detail.php?slug=<?php echo $film['slug'] ;?>"><img src="posters/<?php echo $film['id']; ?>.jpg" alt="posters"></a>
         </div>
         <?php
         echo '</br>';
       }
-        include 'inc/header.php'; ?>
+       ?>
 
       <button type="button" name="button"> <a href="index.php">+ de films !</a></button>
