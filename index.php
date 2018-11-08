@@ -15,6 +15,3 @@
         <?php
         echo '</br>';
       }
-       ?>
-
-      <button type="button" name="button"> <a href="index.php">+ de films !</a></button>
