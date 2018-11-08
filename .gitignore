@@ -1,3 +1,5 @@
-.sql
-.zip
-posters\
+*.sql
+*.zip
+posters/
+cdc.php
+inc/pdo.php
