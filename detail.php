@@ -29,7 +29,25 @@ if(!empty($_GET['slug'])) {
 else {
   die('404');
 }
+/******************************************************************************/
 
+if (!empty($_POST['submitted'])) {
+  $movieid = trim(strip_tags($_POST['movie_id']));
+  $userid = $_SESSION['user']['id'];
+  $sql = "INSERT INTO `liste_movie`(`user_id`, `movie_id`, `created_at`) VALUES (:userid, :movieid, NOW())";
+  $query = $pdo -> prepare($sql);
+  $query -> bindValue(':userid',$userid,PDO::PARAM_INT);
+  $query -> bindValue(':movieid',$movieid,PDO::PARAM_INT);
+  $query -> execute();
+
+
+  // $sql = "SELECT * FROM liste_movie WHERE movie_id = :movie_id";
+  // $query = $pdo -> prepare($sql);
+  // $query->bindValue(':movie_id',$movie['id'],PDO::PARAM_STR);
+  // $query -> execute();
+  // $movie_id= $query -> fetch();
+  // echo $movie_id;
+}
 ?>
 
 <?php include('inc/header.php'); ?>
@@ -45,16 +63,23 @@ else {
     <p class="mpaa">Classification age: <?php echo $movie['mpaa'];?></p>
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
     <p class="rating">Rating: <?php echo $movie['rating'];?></p>
+    <p class="idmovie">Rating: <?php echo $movie['id'];?></p>
 </div>
 
-// Si connecté, affiche un bouton d'ajout à sa liste
-<?php if (isLogged()){?>
-  <form class="" action="index.html" method="post">
-        //CAS Déjà cliqué sur ajout
-    //Si $_SESSION['user']['id'] est dans la base de donnée + id du film dans BSD == Id sur la page -> on affiche pas
-      // CAS affiché ajout
-    // Si $_SESSION['user']['id'] est dans la base de donnée + id du film dans BSD != Id sur la page -> on affiche
+<!--Si connecté, affiche un bouton d'ajout à sa liste -->
+
+<?php if (isLogged()){ ?>
+
+  <form method="post">
+    <input type="submit" name="submitted" value="Ajouter à ma liste">
+    <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
   </form>
 <?php } ?>
 
 <?php include('inc/footer.php'); ?>
+
+
+<!-- //CAS Déjà cliqué sur ajout
+//Si $_SESSION['user']['id'] est dans la base de donnée + id du film dans BSD == Id sur la page -> on affiche pas
+// CAS affiché ajout
+// Si $_SESSION['user']['id'] est dans la base de donnée + id du film dans BSD != Id sur la page -> on affiche -->

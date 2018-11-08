@@ -201,3 +201,8 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     }
     return FALSE;
   }
+
+  // function ajouterListe()
+  // {
+  //
+  // }

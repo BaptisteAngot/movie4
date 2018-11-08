@@ -15,3 +15,7 @@
         <?php
         echo '</br>';
       }
+?>
+<?php include 'inc/header'; ?>
+
+<?php include 'inc/footer'; ?>
