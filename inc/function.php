@@ -201,3 +201,33 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     }
     return FALSE;
   }
+
+
+
+
+/////////////////////////////////////////DASHBOARD\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+function Afficherinfo($user){
+  echo '<tr>';
+    echo '<td>' . $user['id'] . '</td>';
+    echo '<td>' . $user['login'] . '</td>';
+    echo '<td>' . $user['password'] . '</td>';
+    echo '<td>' . $user['status'] . '</td>';
+    echo '<td>' . $user['token'] . '</td>';
+    echo '<td>' . $user['date_creation'] . '</td>';
+  echo '</tr>';
+}
+
+function afficherelement($element,$pagename){
+  echo '<li ';
+  if($element[0] == $pagename ){
+    echo 'class= "nav-item active">';
+  }
+  else{
+    echo 'class= "nav-item">';
+  }
+  echo '<a class= "nav-link" href='.$element[1].'>';
+  echo '<i class="material-icons">' .$element[2]. '</i>';
+  echo '<p>' . $element[3] . '</p>';
+  echo '</a>';
+  echo '</li>';
+}
