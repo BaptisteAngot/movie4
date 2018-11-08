@@ -9,7 +9,7 @@
     <meta name="keyword" content="PHP,movie4,exercice,">
     <meta name="author" content="L'équipe">
     <meta name="robots" content="all|(no)follow|(no)index|none">
-    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 <!-- Titre du site -->
     <title>Movie 4</title>
 

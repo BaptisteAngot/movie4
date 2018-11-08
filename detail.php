@@ -44,9 +44,6 @@ else {
     <p class="mpaa">Classification age: <?php echo $movie['mpaa'];?></p>
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
 <div class="star-ratings-sprite"><span style="width: <?php echo $movie['rating'];?>%" class="star-ratings-sprite-rating"></span></div>
-    <?php if (isLogged()) { ?>
-      <a href="addlist.php">Ajouter à la liste</a>
-    <?php } ?>
 </div>
 
 
