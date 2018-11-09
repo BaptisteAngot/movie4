@@ -177,16 +177,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     return FALSE;
   }
 /////////////////////////////////////////DASHBOARD\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-function Afficherinfo($user){
-  echo '<tr>';
-    echo '<td>' . $user['id'] . '</td>';
-    echo '<td>' . $user['login'] . '</td>';
-    echo '<td>' . $user['password'] . '</td>';
-    echo '<td>' . $user['status'] . '</td>';
-    echo '<td>' . $user['token'] . '</td>';
-    echo '<td>' . $user['date_creation'] . '</td>';
-  echo '</tr>';
-}
 function afficherelement($element,$pagename){
   echo '<li ';
   if($element[0] == $pagename ){
@@ -200,4 +190,52 @@ function afficherelement($element,$pagename){
   echo '<p>' . $element[3] . '</p>';
   echo '</a>';
   echo '</li>';
+}
+
+
+function Afficherinfo($user){
+  echo '<tr>';
+    echo '<td>' . $user['id'] . '</td>';
+    echo '<td>' . $user['pseudo'] . '</td>';
+    echo '<td>' . $user['password'] . '</td>';
+    echo '<td>' . $user['role'] . '</td>';
+    echo '<td>' . $user['token'] . '</td>';
+    echo '<td>' . $user['created_at'] . '</td>';
+    echo '<td>
+            <button type="button" rel="tooltip" class="btn btn-success btn-round">
+                <a class="material-icons" href="edit_user_back.php?=' . $user['id'] . '">edit</a>
+            </button>
+          </td>';
+  echo '</tr>';
+}
+
+function Affichertableauuser($users,$title,$description){
+  echo '<div class="col-md-12">';
+    echo '<div class="card">';
+      echo '<div class="card-header card-header-primary">';
+        echo '<h4 class="card-title ">' . $title . '</h4>';
+        echo '<p class="card-category">' . $description . '</p>';
+      echo '</div>';
+      echo '<div class="card-body">';
+        echo '<div class="table-responsive">';
+          echo '<table class="table">';
+            echo '<thead class=" text-primary">';
+              echo '<th> ID </th>';
+              echo '<th> Login </th>';
+              echo '<th> Password </th>';
+              echo '<th> Status </th>';
+              echo '<th> Token </th>';
+              echo '<th> Date de création </th>';
+              echo '<th> Edit </th>';
+            echo '</thead>';
+            echo '<tbody>';
+              foreach ($users as $user) {
+                Afficherinfo($user);
+              }
+            echo '</tbody>';
+          echo '</table>';
+        echo '</div>';
+      echo '</div>';
+    echo '</div>';
+  echo '</div>';
 }
