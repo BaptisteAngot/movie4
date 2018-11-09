@@ -53,12 +53,12 @@
             <ul class="navbar-nav">
               <li class="nav-item">
                 <a class="nav-link" href="./index.php">
-                  Acceuil
+                  <i class="material-icons">home</i>Acceuil
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./deconnexion.php">
-                  Deconnexion
+                  <i class="material-icons">clear</i>Deconnexion
                 </a>
               </li>
             </ul>
