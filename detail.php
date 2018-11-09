@@ -63,6 +63,7 @@ $movie_id= $query -> fetch();
 
 <!--Si connecté, affiche un bouton d'ajout à sa liste -->
 <?php if (isLogged()) {
+  
 
     if ($movie_id['movie_id'] != $movie['id'] ){
       ?>
@@ -74,6 +75,6 @@ $movie_id= $query -> fetch();
       echo 'déjà inscrit';
     }
   }
-?>
+? >
 
 <?php include('inc/footer.php'); ?>
