@@ -201,18 +201,24 @@ function Afficherinfo($user){
     echo '<td>' . $user['role'] . '</td>';
     echo '<td>' . $user['token'] . '</td>';
     echo '<td>' . $user['created_at'] . '</td>';
+    echo '<td>' . $user['updated_at'] . '</td>';
     echo '<td>
             <button type="button" rel="tooltip" class="btn btn-success btn-round">
-                <a class="material-icons" href="edit_user_back.php?=' . $user['id'] . '">edit</a>
+                <a class="material-icons" href="edit_user_back.php?id=' . $user['id'] . '">edit</a>
             </button>
           </td>';
+    echo '<td>
+            <button type="button" rel="tooltip" class="btn btn-success btn-round">
+                <a class="material-icons" href="add_user_back.php?id=' . $user['id'] . '">add</a>
+            </button>
+            </td>';
   echo '</tr>';
 }
 
 function Affichertableauuser($users,$title,$description){
   echo '<div class="col-md-12">';
     echo '<div class="card">';
-      echo '<div class="card-header card-header-primary">';
+      echo '<div class="card-header card-header-primary" >';
         echo '<h4 class="card-title ">' . $title . '</h4>';
         echo '<p class="card-category">' . $description . '</p>';
       echo '</div>';
@@ -221,12 +227,13 @@ function Affichertableauuser($users,$title,$description){
           echo '<table class="table">';
             echo '<thead class=" text-primary">';
               echo '<th> ID </th>';
-              echo '<th> Login </th>';
+              echo '<th> Pseudo </th>';
               echo '<th> Password </th>';
-              echo '<th> Status </th>';
+              echo '<th> Rôle </th>';
               echo '<th> Token </th>';
               echo '<th> Date de création </th>';
-              echo '<th> Edit </th>';
+              echo '<th> Date de modification </th>';
+              echo '<th> Action </th>';
             echo '</thead>';
             echo '<tbody>';
               foreach ($users as $user) {
