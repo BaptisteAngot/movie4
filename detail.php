@@ -47,8 +47,8 @@ $query = $pdo -> prepare($sql);
 $query->bindValue(':movie_id',$movie['id'],PDO::PARAM_STR);
 $query -> execute();
 $movie_id= $query -> fetch();
-echo 'movie_id :' . $movie_id['movie_id'];
-echo 'user_id :' . $movie_id['user_id'];
+echo $_SESSION['user']['id'];
+echo $movie_id['user_id'];
 
 
 
@@ -66,19 +66,25 @@ echo 'user_id :' . $movie_id['user_id'];
     <p class="mpaa">Classification age: <?php echo $movie['mpaa'];?></p>
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
     <p class="rating">Rating: <?php echo $movie['rating'];?></p>
-    <p class="idmovie">idmovie: <?php echo $movie['id'];?></p>
+    <p class="rating">Rating: <?php echo $movie['id'];?></p>
 </div>
 
 <!--Si connecté, affiche un bouton d'ajout à sa liste -->
+<?php if (isLogged()) {
+  if ($_SESSION['user']['id'] != $movie_id['user_id']) {
 
-<?php if (isLogged() && $movie_id['movie_id'] != $movie['id'] && $_SESSION){ ?>
-
-  <form method="post">
-    <input type="submit" name="submitted" value="Ajouter à ma liste">
-    <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
-  </form>
-<?php } ?>
-
-
+ if ($movie_id['movie_id'] != $movie['id']) { ?>
+      <form method="post">
+        <input type="submit" name="submitted" value="Ajouter à ma liste">
+        <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
+      </form> <?php
+  } else {
+    echo ' Vous avez déjà ajouté ce film à votre liste';
+  }
+  if ($_SESSION['user']['id'] != $movie_id['user_id']) {
+   echo 'les identifiants ne correspondent pas';
+  }
+}
+} ?>
 
 <?php include('inc/footer.php'); ?>
