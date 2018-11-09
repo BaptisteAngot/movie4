@@ -193,7 +193,7 @@ function afficherelement($element,$pagename){
 }
 
 
-function Afficherinfo($user){
+function AfficherinfoUser($user){
   echo '<tr>';
     echo '<td>' . $user['id'] . '</td>';
     echo '<td>' . $user['pseudo'] . '</td>';
@@ -203,29 +203,28 @@ function Afficherinfo($user){
     echo '<td>' . $user['created_at'] . '</td>';
     echo '<td>' . $user['updated_at'] . '</td>';
     echo '<td>
-            <button type="button" rel="tooltip" class="btn btn-success btn-round">
-                <a class="material-icons" href="edit_user_back.php?id=' . $user['id'] . '">edit</a>
-            </button>
+            <a href="add_user_back.php?id=' . $user['id'] . '" class="btn btn-success btn-round btn-sm" role="button"> <i class="material-icons">add</i></a>
           </td>';
     echo '<td>
-            <button type="button" rel="tooltip" class="btn btn-success btn-round">
-                <a class="material-icons" href="add_user_back.php?id=' . $user['id'] . '">add</a>
-            </button>
-            </td>';
+            <a href="edit_user_back.php?id=' . $user['id'] . '" class="btn btn-warning btn-round btn-sm" role="button"> <i class="material-icons">edit</i></a>
+          </td>';
+    echo '<td>
+            <a href="delete_user_back.php?id=' . $user['id'] . '" class="btn btn-danger btn-round btn-sm" role="button"> <i class="material-icons">delete_forever</i></a>
+          </td>';
   echo '</tr>';
 }
 
 function Affichertableauuser($users,$title,$description){
   echo '<div class="col-md-12">';
     echo '<div class="card">';
-      echo '<div class="card-header card-header-primary" >';
+      echo '<div class="card-header card-header-success" >';
         echo '<h4 class="card-title ">' . $title . '</h4>';
         echo '<p class="card-category">' . $description . '</p>';
       echo '</div>';
       echo '<div class="card-body">';
         echo '<div class="table-responsive">';
           echo '<table class="table">';
-            echo '<thead class=" text-primary">';
+            echo '<thead class=" text-success">';
               echo '<th> ID </th>';
               echo '<th> Pseudo </th>';
               echo '<th> Password </th>';
@@ -237,7 +236,7 @@ function Affichertableauuser($users,$title,$description){
             echo '</thead>';
             echo '<tbody>';
               foreach ($users as $user) {
-                Afficherinfo($user);
+                AfficherinfoUser($user);
               }
             echo '</tbody>';
           echo '</table>';
@@ -246,3 +245,125 @@ function Affichertableauuser($users,$title,$description){
     echo '</div>';
   echo '</div>';
 }
+
+function AffichertableauMovie($movies,$title,$description){
+  echo '<div class="col-md-12">';
+    echo '<div class="card">';
+      echo '<div class="card-header card-header-success" >';
+        echo '<h4 class="card-title ">' . $title . '</h4>';
+        echo '<p class="card-category">' . $description . '</p>';
+      echo '</div>';
+      echo '<div class="card-body">';
+        echo '<div class="table-responsive">';
+          echo '<table class="table">';
+            echo '<thead class=" text-success">';
+              echo '<th> ID </th>';
+              echo '<th> Slug </th>';
+              echo '<th> Titre </th>';
+              echo '<th> Année </th>';
+              echo '<th> Genre </th>';
+              echo '<th> Synopsis </th>';
+              echo '<th> Réalisateur </th>';
+              echo '<th> Casting </th>';
+              echo '<th> Script </th>';
+              echo '<th> Temps </th>';
+              echo '<th> Classification </th>';
+              echo '<th> Rating </th>';
+              echo '<th> Popularity </th>';
+              echo '<th> Date de création </th>';
+              echo '<th> Date de modification </th>';
+              echo '<th> Drapeau poster </th>';
+              echo '<th> Action </th>';
+            echo '</thead>';
+            echo '<tbody>';
+              foreach ($movies as $movie) {
+                AfficherinfoMovie($movie);
+              }
+            echo '</tbody>';
+          echo '</table>';
+        echo '</div>';
+      echo '</div>';
+    echo '</div>';
+  echo '</div>';
+}
+
+function AfficherinfoMovie($movie){
+  echo '<tr>';
+    echo '<td>' . $movie['id'] . '</td>';
+    echo '<td>' . $movie['slug'] . '</td>';
+    echo '<td>' . $movie['title'] . '</td>';
+    echo '<td>' . $movie['year'] . '</td>';
+    echo '<td>' . $movie['genres'] . '</td>';
+    echo '<td>' . $movie['plot'] . '</td>';
+    echo '<td>' . $movie['directors'] . '</td>';
+    echo '<td>' . $movie['cast'] . '</td>';
+    echo '<td>' . $movie['writers'] . '</td>';
+    echo '<td>' . $movie['runtime'] . '</td>';
+    echo '<td>' . $movie['mpaa'] . '</td>';
+    echo '<td>' . $movie['rating'] . '</td>';
+    echo '<td>' . $movie['popularity'] . '</td>';
+    echo '<td>' . $movie['created'] . '</td>';
+    echo '<td>' . $movie['modified'] . '</td>';
+    echo '<td>' . $movie['poster_flag'] . '</td>';
+    echo '<td>
+            <a href="add_movie_back.php?id=' . $movie['id'] . '" class="btn btn-success btn-round btn-sm" role="button"> <i class="material-icons">add</i></a>
+          </td>';
+    echo '<td>
+            <a href="edit_movie_back.php?id=' . $movie['id'] . '" class="btn btn-warning btn-round btn-sm" role="button"> <i class="material-icons">edit</i></a>
+          </td>';
+    echo '<td>
+            <a href="" class="btn btn-danger btn-round btn-sm" role="button" data-toggle="modal" data-target="#exampleModal"> <i class="material-icons">delete_forever</i></a>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Supprimer un film</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Êtes-vous sûr de vouloir supprimer le film ' . $movie['title'] . '?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    <a href="delete_movie_back.php?id=' . $movie['id'] . '" class="btn btn-danger" role="button">SUPPRIMER</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>';
+  echo '</tr>';
+
+}
+
+function modalDelete()
+{?>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php } ?>

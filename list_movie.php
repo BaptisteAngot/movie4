@@ -1,12 +1,12 @@
 <?php
-$pagename="users";
+$pagename="list_movie";
 include 'inc/pdo.php';
 include 'inc/function.php';
 
-$sql="SELECT * FROM user";
+$sql="SELECT * FROM movies_full ORDER BY id ASC LIMIT 0,10  ";
 $query=$pdo->prepare($sql);
 $query->execute();
-$users=$query->fetchAll();
+$movies=$query->fetchAll();
 
  ?>
 
@@ -16,7 +16,8 @@ $users=$query->fetchAll();
 <div class="content">
   <div class="container-fluid">
     <div class="row">
-      <?php Affichertableauuser($users,"Liste users", "Un tableau de tous les utilisateurs enregistrés") ?>
+      <?php AffichertableauMovie($movies,"Liste users", "Un tableau de tous les utilisateurs enregistrés") ?>
+      <?php modalDelete(); ?>
       </div>
     </div>
   </div>

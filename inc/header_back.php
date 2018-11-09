@@ -35,8 +35,8 @@
            <?php
            $tableau_element_liste = array(
              array('statistique','./dashboard.php','pageview','Statistique'),
-             // array('list_user_movie','./table.php','content_paste','Movie List'),
-             array('users','./users_back.php','person','Users list')
+             array('users','./users_back.php','person','Users list'),
+             array('list_movie','./list_movie.php','movie','Movie list')
            );
             foreach ($tableau_element_liste as $element) {
               afficherelement($element, $pagename );

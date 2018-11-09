@@ -26,9 +26,6 @@ if (!empty($_GET['id']) && is_numeric($_GET['id'])) {
       $query = $pdo -> prepare($sql);
       $query -> bindValue(':role', $roles, PDO::PARAM_STR);
     }
-    else {
-      die ('efaqf');
-    }
   }
   else {
     die('404');
