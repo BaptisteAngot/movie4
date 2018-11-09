@@ -35,7 +35,7 @@
           <ul class="nav">
             <?php
             $tableau_element_liste = array(
-              array('dashboard','./dashboard.php','dashboard','Dashboard'),
+              array('statistique','./dashboard.php','pageview','Statistique'),
               // array('list_user_movie','./table.php','content_paste','Movie List'),
               array('users','./users_back.php','person','Users list')
             );

@@ -1,5 +1,5 @@
 <?php
-$pagename="dashboard";
+$pagename="statistique";
 include 'inc/pdo.php';
 include 'inc/function.php';
 isLogged();
