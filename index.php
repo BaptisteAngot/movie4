@@ -15,5 +15,6 @@
         <?php
         echo '</br>';
       }
-      include 'inc/footer.php';
-?>
+      ?> <button type="button" name="button"> <a href="refresh.php">+ de films !</a> </button>
+
+    <?php include 'inc/footer.php';?>

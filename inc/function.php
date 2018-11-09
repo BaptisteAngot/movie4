@@ -1,5 +1,4 @@
 <?php
-
 function pre($array){
   echo '<pre>';
   print_r($array);
@@ -8,7 +7,6 @@ function pre($array){
 function imageMovie($movie){
   ?><img src="posters/<?php echo $movie['id'] ?>.jpg" alt="<?php echo $movie['title']; ?>">
 <?php }
-
 function convertToHoursMins($time, $format = '%02d:%02d') {
     if ($time < 1) {
         return;
@@ -21,14 +19,12 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
   {
     echo '<br />';
   }
-
   function debug($array)
   {
     echo '<pre>';
       print_r($array);
     echo '</pre>';
   }
-
   function labelText($name, $title)
   {
     echo '<label for="'.$name.'">'.$title.'</label>';
@@ -38,9 +34,7 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
       echo $_POST[$name];
     }
     echo '">';
-
   }
-
   function afficherErreur($error, $name)
   {
     echo '<span class="error">';
@@ -49,19 +43,16 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
        }
     echo '</span>';
   }
-
   function labelTextArea($name, $title, $rows, $cols)
   {
     echo '<label for="'.$name.'">'.$title.'</label>';
     br();
     echo '<textarea name="'.$name.'" rows="'.$rows.'" cols="'.$cols.'"></textarea>';
   }
-
   function inputButton($value)
   {
     echo '<input type="submit" name="submitted" value="'.$value.'">';
   }
-
   function validationTexte($error, $data, $min, $max, $key, $empty = true){
   if (!empty($data)){
       if(strlen($data) < $min ) {
@@ -73,11 +64,9 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     if ($empty) {
       $error[$key] = 'Veuillez renseignez ce champ';
     }
-
   }
     return $error;
   }
-
   function generateRandomString($length) {
       $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $charactersLength = strlen($characters);
@@ -87,10 +76,8 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
       }
       return $randomString;
   }
-
   function validationpseudo($error,$pseudo,$min,$max,$empty = true){
   global $pdo;
-
   if (!empty($pseudo)) {
     if(strlen($pseudo)<$min){
       $error['pseudo']= 'minimum '.$min .' caractères';
@@ -106,7 +93,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
         $query->bindValue(':pseudo',$pseudo,PDO::PARAM_STR);
         $query->execute();
         $resultat = $query->fetch();
-
         if(!empty($resultat)){
           $error['pseudo']='Pseudo déjà utilisé';
         }
@@ -119,24 +105,18 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
   }
     return $error;
 }
-
-
   function validationemail($error,$mail,$empty=true){
   global $pdo;
-
   if(!empty($mail)){
     if (filter_var($mail, FILTER_VALIDATE_EMAIL)){
-
         $sql="SELECT email FROM user WHERE email = :email";
         $query=$pdo->prepare($sql);
         $query->bindValue(':email',$mail,PDO::PARAM_STR);
         $query->execute();
         $resultatmail = $query->fetch();
-
         if(!empty($resultatmail)){
           $error['mail']='Mail déjà utilisé';
         }
-
     } else {
       $error['mail'] = ' mail invalide';
     }
@@ -146,7 +126,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
   }
   return $error;
   }
-
   function validationpassword($error,$password1,$password2,$min,$max,$empty = true){
     global $pdo;
     if (!empty($password1)) {
@@ -167,7 +146,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
           $query->bindValue(':password',$password1,PDO::PARAM_STR);
           $query->execute();
           $resultatpassword = $query->fetch();
-
           if(!empty($resultatpassword)){
             $error['password']='Pseudo déjà utilisé';
           }
@@ -178,8 +156,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     }
     return $error;
   }
-
-
   function isAdmin()
   {
     if (isLogged()) {
@@ -189,7 +165,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     }
     return FALSE;
   }
-
   function isLogged()
   {
     if (!empty($_SESSION['user']['id']) && !empty($_SESSION['user']['pseudo']) && !empty($_SESSION['user']['email']) && !empty($_SESSION['user']['role']) && !empty($_SERVER['REMOTE_ADDR'])) {
@@ -201,10 +176,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     }
     return FALSE;
   }
-
-
-
-
 /////////////////////////////////////////DASHBOARD\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 function Afficherinfo($user){
   echo '<tr>';
