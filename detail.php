@@ -40,16 +40,19 @@ if (!empty($_POST['submitted'])) {
   $query -> bindValue(':movieid',$movieid,PDO::PARAM_INT);
   $query -> execute();
 
-
-  // $sql = "SELECT * FROM liste_movie WHERE movie_id = :movie_id";
-  // $query = $pdo -> prepare($sql);
-  // $query->bindValue(':movie_id',$movie['id'],PDO::PARAM_STR);
-  // $query -> execute();
-  // $movie_id= $query -> fetch();
-  // echo $movie_id;
 }
-?>
 
+$sql = "SELECT * FROM liste_movie WHERE movie_id = :movie_id";
+$query = $pdo -> prepare($sql);
+$query->bindValue(':movie_id',$movie['id'],PDO::PARAM_STR);
+$query -> execute();
+$movie_id= $query -> fetch();
+echo 'movie_id :' . $movie_id['movie_id'];
+echo 'user_id :' . $movie_id['user_id'];
+
+
+
+?>
 <?php include('inc/header.php'); ?>
 
 <div class="film">
@@ -63,17 +66,19 @@ if (!empty($_POST['submitted'])) {
     <p class="mpaa">Classification age: <?php echo $movie['mpaa'];?></p>
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
     <p class="rating">Rating: <?php echo $movie['rating'];?></p>
-    <p class="idmovie">Rating: <?php echo $movie['id'];?></p>
+    <p class="idmovie">idmovie: <?php echo $movie['id'];?></p>
 </div>
 
 <!--Si connecté, affiche un bouton d'ajout à sa liste -->
 
-<?php if (isLogged()){ ?>
+<?php if (isLogged() && $movie_id['movie_id'] != $movie['id'] && $_SESSION){ ?>
 
   <form method="post">
     <input type="submit" name="submitted" value="Ajouter à ma liste">
     <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
   </form>
 <?php } ?>
+
+
 
 <?php include('inc/footer.php'); ?>
