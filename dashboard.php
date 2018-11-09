@@ -13,6 +13,12 @@ else {
 
 include ('inc/header_back.php');
  ?>
-
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      toto
+    </div>
+  </div>
+</div>
 <?php
 include 'inc/footer_back.php';
