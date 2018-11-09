@@ -63,18 +63,17 @@ $movie_id= $query -> fetch();
 
 <!--Si connecté, affiche un bouton d'ajout à sa liste -->
 <?php if (isLogged()) {
-  
 
     if ($movie_id['movie_id'] != $movie['id'] ){
       ?>
          <form method="post">
            <input type="submit" name="submitted" value="Ajouter à ma liste">
-           <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
+           <input type="hidden" name="movie_id" value="<?php echo $movie['id']; ?>">
          </form> <?php
     } else {
       echo 'déjà inscrit';
     }
   }
-? >
+?>
 
 <?php include('inc/footer.php'); ?>
