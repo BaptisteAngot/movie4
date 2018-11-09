@@ -40,8 +40,11 @@ $query = $pdo -> prepare($sql);
 $query->bindValue(':movie_id',$movie['id'],PDO::PARAM_STR);
 $query -> execute();
 $movie_id= $query -> fetch();
-echo 'movie_id :' . $movie_id['movie_id'];
-echo 'user_id :' . $movie_id['user_id'];
+
+echo 'utilisateur actuel :' . $_SESSION['user']['id'];
+echo $movie_id['user_id'];
+
+
 ?>
 <?php include('inc/header.php'); ?>
 
@@ -57,18 +60,31 @@ echo 'user_id :' . $movie_id['user_id'];
     <p class="popularity">Popularité: <?php echo $movie['popularity'];?></p>
     <p class="rating">Rating: <?php echo $movie['rating'];?></p>
     <div class="star-ratings-sprite"><span style="width: <?php echo $movie['rating'];?>%" class="star-ratings-sprite-rating"></span></div>
+
 </div>
 
 <!--Si connecté, affiche un bouton d'ajout à sa liste -->
-
-<?php if (isLogged() && $movie_id['movie_id'] != $movie['id'] && $_SESSION){ ?>
-
-  <form method="post">
-    <input type="submit" name="submitted" value="Ajouter à ma liste">
-    <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
-  </form>
-<?php } ?>
-
-
+<?php if (isLogged()) {
+  if ( $_SESSION['user']['id'] == $movie_id['user_id'] && $movie_id['movie_id'] != $movie['id'] ) { ?>
+        <form method="post">
+          <input type="submit" name="submitted" value="Ajouter à ma liste">
+          <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
+        </form>
+      <?php } elseif ( $_SESSION['user']['id'] == $movie_id['user_id'] && $movie_id['movie_id'] == $movie['id'] ) {
+        echo 'Déjà entré';
+      }
+      if ( $_SESSION['user']['id'] != $movie_id['user_id'] && $movie_id['movie_id'] == $movie['id'] ) {?>
+        <form method="post">
+          <input type="submit" name="submitted" value="Ajouter à ma liste">
+          <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
+        </form>
+      <?php }
+      if ( $_SESSION['user']['id'] != $movie_id['user_id'] && $movie_id['movie_id'] != $movie['id'] ) {?>
+        <form method="post">
+          <input type="submit" name="submitted" value="Ajouter à ma liste">
+          <input type="text" name="movie_id" value="<?php echo $movie['id']; ?>">
+        </form><?php
+      }
+  } ?>
 
 <?php include('inc/footer.php'); ?>
