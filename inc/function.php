@@ -202,12 +202,6 @@ function convertToHoursMins($time, $format = '%02d:%02d') {
     return FALSE;
   }
 
-<<<<<<< HEAD
-  // function ajouterListe()
-  // {
-  //
-  // }
-=======
 
 
 
@@ -237,4 +231,3 @@ function afficherelement($element,$pagename){
   echo '</a>';
   echo '</li>';
 }
->>>>>>> 5d787485d423fdb55246a6b722156024767275e0
